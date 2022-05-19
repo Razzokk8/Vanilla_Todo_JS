@@ -84,8 +84,9 @@ li, .fl, .fr, .cross {
     max-height: 50px;
 }
 
-li.completed {
+.completed {
     text-decoration: line-through;
+    color: greenyellow;
 }
 
 .fl, .fr {
@@ -109,6 +110,8 @@ li.completed {
     padding: 2px;
 }
 
+
+
 .cross {
    min-height: 80px;
 }
@@ -118,4 +121,12 @@ li.completed {
     font-size: 44px;
     align-self: center;
     max-height: 45px;
+}
+
+.buttonWrap {
+    margin: 5px auto 40px auto;
+}
+
+button {
+    width: 120px;
 }

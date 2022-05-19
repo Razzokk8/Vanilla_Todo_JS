@@ -2,68 +2,108 @@
 
 function Todolist() {
     let ultodo, input ;
-    const todos = [
+    let todos = [
         {
             id : 0,
             text : 'Go to swim',
             completed : false
         },
         {
-            id : 0,
+            id : 1,
             text : 'Do homework',
             completed : false
         },
         {
-            id : 0,
-            text : 'Buy a bag of weed',
+            id : 2,
+            text : 'Buy a bag of good weed',
             completed : false
         },
         {
-            id : 0,
+            id : 3,
             text : 'Learn mySQL',
-            completed : true
+            completed : false
         },
     ];
+
+    const loadTodosFromLocalStorage = () => {
+        const localTodos = localStorage.getItem('todos');
+        if (localTodos) {
+            const todoArr = JSON.parse(localTodos);
+            if (todoArr) {
+                todos = todoArr;
+            }
+        }
+    };
+
+    const saveTodosInLocalStorage = () => {
+        localStorage.setItem('todos' , JSON.stringify(todos));
+    }
+
+    const removeTodo = id => {
+        todos = todos.filter( todo => todo.id !== id);
+        saveTodosInLocalStorage();
+        ultodo.removeChild(ultodo.querySelector('#todo' + id));
+    };
+
+    const toggleTodo = (id, ele) => {
+        todos = todos.map( ele => {
+            if(ele.id === id){
+                ele.completed = !ele.completed;
+            }
+            return ele;
+        });
+        saveTodosInLocalStorage();
+        const oldClass = ele.classList.contains('completed') ? 'completed' : 'uncompleted';
+        const newClass = oldClass === 'completed' ? 'uncompleted' : 'completed';
+        ele.classList.replace(oldClass, newClass);
+        ele.parentNode.classList.toggle('completed');
+    };
 
     const createLi = ({text, completed, id}) => {
 
         const li = document.createElement('li');
-        li.id = id;
+        li.id = 'todo' + id;
+        if (completed) {
+            li.classList.add('completed');
+        };
         const fdiv = document.createElement('div')
         fdiv.classList.add('fl')
         const check = document.createElement('span');
         check.classList.add(completed ? 'completed' : 'uncompleted');
+        check.addEventListener('click' , (e) => {
+            toggleTodo(id, e.target);
+        });
         fdiv.appendChild(check);        
         li.appendChild(fdiv);
 
         const textNode = document.createTextNode(text);
         fdiv.appendChild(textNode);
         
-
         const sdiv = document.createElement('div');
         sdiv.classList.add('fr');
         const cross = document.createElement('span');        
         cross.classList.add('cross');
+        cross.addEventListener('click' , (e) => {
+            removeTodo(id);
+        });
         sdiv.appendChild(cross);
         li.appendChild(sdiv);
 
         return li
-
         /*         <li>
             <div class="fl">
             <span class="completed"></span>
             todo
             </div>
-
             <div class="fr">
             <span class="cross"></span>
             </div>
         </li> */
-
     };
 
     const addNewTodo = (todo) => {
-        todos.push(todo);
+        todos.unshift(todo);
+        saveTodosInLocalStorage();
         const li = createLi(todo);
         const firstLi = ultodo.firstChild;
         if(!firstLi) {
@@ -87,18 +127,54 @@ function Todolist() {
         }
     }
 
-    const renderTodos = () => {
+    const renderTodos = (todoType) => {
+        const lis = ultodo.querySelectorAll('li');
+        if (lis) {
+            lis.forEach( li => ultodo.removeChild(li));
+        };
+        const currentTodos = todos.filter(todo => {
+
+            if (todoType === 'all'){
+                return todo;
+            }
+
+            return (todoType === 'completed') ? todo.completed : !todo.completed;
+        })
+
+        currentTodos.map( todo => createLi(todo))
+        .forEach( li => ultodo.appendChild(li));
+    }
+
+    const renderTodosList = () => {
+        loadTodosFromLocalStorage();
         ultodo = document.querySelector('ul#todolist');
         if(!ultodo){
             ultodo = document.querySelector('ul');
             ultodo.id = 'todolist';
             document.body.appendChild(ultodo);
         }
-        todos.map( todo => createLi(todo))
-        .forEach( li => ultodo.appendChild(li));
+        renderTodos('all');
 
         input = document.querySelector('#todoInput');
         input.addEventListener('keyup', addTodo);
+        document.querySelector('#btnAll').addEventListener('click' , e => {
+            e.target.classList.toggle('active');
+            document.querySelector('#btnCompleted').classList.remove('active');
+            document.querySelector('#btnTodo').classList.remove('active');
+            renderTodos('all');
+        });
+        document.querySelector('#btnCompleted').addEventListener('click' , e => {
+            e.target.classList.toggle('active');
+            document.querySelector('#btnAll').classList.remove('active');
+            document.querySelector('#btnTodo').classList.remove('active');
+            renderTodos('completed');
+        });
+        document.querySelector('#btnTodo').addEventListener('click' , e => {
+            e.target.classList.toggle('active');
+            document.querySelector('#btnCompleted').classList.remove('active');
+            document.querySelector('#btnAll').classList.remove('active');
+            renderTodos('uncompleted');
+        });
 
     };
 
@@ -107,10 +183,13 @@ function Todolist() {
             return todos;
         },
         init : function() {
-            renderTodos();
+            renderTodosList();
         }
     }
 }
+const today = new Date();
+const fs = document.getElementById('footerSpan');
+fs.innerText = today.getFullYear() + ' All rights reserved';
 const myTodo = Todolist();
 myTodo.init();
 console.log(myTodo);

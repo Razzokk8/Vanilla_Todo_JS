@@ -12,10 +12,15 @@
 <body class="container">
     <div id="wrapper">    
     <h1>My To Do List Application.</h1>
-    <input placeholder="Add new todo" name="todo" id="todoInput"/>
+    <input placeholder="Add new todo" name="todo" id="todoInput" class="form-control"/>
     <ul id="todolist">
 
     </ul>
+    <div class="d-grid gap-3 d-md-block buttonWrap">
+        <button class="btn btn-primary active" id="btnAll" type="button">All</button>
+        <button class="btn btn-primary" id="btnCompleted" type="button">Completed</button>
+        <button class="btn btn-primary" id="btnTodo" type="button">To Do</button>
+      </div>
     </div>
     <footer>
         <div className='bg-light'>
@@ -47,13 +52,11 @@
                 </div>
             </div>
             <div>
-            <div class="navbar-brand mb-0 h1">Riccardo Limiti &copy; <span>{today.getFullYear()} All rights reserved</span>
+            <div class="navbar-brand mb-0 h1">Riccardo Limiti &copy; <span id="footerSpan"></span>
             </div>
             </div>
             </nav>
             </div>
-        
-    
     </footer>
     <!-- JavaScript BS Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
