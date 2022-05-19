@@ -56,7 +56,7 @@ function Todolist() {
         const oldClass = ele.classList.contains('completed') ? 'completed' : 'uncompleted';
         const newClass = oldClass === 'completed' ? 'uncompleted' : 'completed';
         ele.classList.replace(oldClass, newClass);
-        ele.parentNode.classList.toggle('completed');
+        ele.parentElement.classList.toggle('completed');
     };
 
     const createLi = ({text, completed, id}) => {
@@ -69,15 +69,14 @@ function Todolist() {
         const fdiv = document.createElement('div')
         fdiv.classList.add('fl')
         const check = document.createElement('span');
+        fdiv.appendChild(check);  
         check.classList.add(completed ? 'completed' : 'uncompleted');
         check.addEventListener('click' , (e) => {
             toggleTodo(id, e.target);
         });
-        fdiv.appendChild(check);        
-        li.appendChild(fdiv);
-
         const textNode = document.createTextNode(text);
         fdiv.appendChild(textNode);
+        li.appendChild(fdiv);
         
         const sdiv = document.createElement('div');
         sdiv.classList.add('fr');
@@ -90,10 +89,10 @@ function Todolist() {
         li.appendChild(sdiv);
 
         return li
-        /*         <li>
+        /*<li>
             <div class="fl">
             <span class="completed"></span>
-            todo
+            todo text
             </div>
             <div class="fr">
             <span class="cross"></span>

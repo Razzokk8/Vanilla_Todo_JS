@@ -33,14 +33,20 @@ h1 {
     color: whitesmoke;
 }
 
+input {
+    margin: auto;
+    min-width: 350px;
+}
+
+li {
+    margin: auto;
+    max-width: 840px;
+}
+
 footer {
     text-align: center;
     font-size: 12px;
     text-shadow: 1px 0.5px rgba(0, 0, 0, 0.751);
-/*     bottom: 0;
-    left: 0;
-    right: 0;
-    height:100px; */
 }
 
 nav {
@@ -109,12 +115,9 @@ li, .fl, .fr, .cross {
     font-size: 30px;
     padding: 2px;
 }
-
-
-
 .cross {
    min-height: 80px;
-}
+} 
 .cross::after {
     content: '\02A2F';
     color: rgb(200, 0, 0);
@@ -130,3 +133,8 @@ li, .fl, .fr, .cross {
 button {
     width: 120px;
 }
+/* // DEBUG SESSION */
+li.completed::after, div.fl.completed::after {
+    display: none;
+}
+
