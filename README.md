@@ -9,4 +9,4 @@ Run App:
 # then it is possible to navigate with the buttons and select only the "todo" or the incomplete list items, 
 # therefore still to be done.
 
---> [Linkedin](https://www.linkedin.com/in/riccardo-limiti-a81061226/)
+My Linkedin profile : --> (https://www.linkedin.com/in/riccardo-limiti-a81061226/)
