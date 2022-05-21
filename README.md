@@ -5,7 +5,7 @@ Run App:
 # https://razzokk8.github.io/Vanilla_Todo_JS/
 
 # Insert in the input field the things to do to create a "todo" list, 
-# press enter and record the items in the list, 
-# then it is possible to navigate with the buttons and select only the "todo" or the incomplete items, 
+# press enter and store the items in the list, 
+# then it is possible to navigate with the buttons and select only the "todo" or the incomplete list items, 
 # therefore still to be done.
 
