@@ -15,8 +15,8 @@ function Todolist() {
         },
         {
             id : 2,
-            text : 'Buy a bag of good weed',
-            completed : false
+            text : 'Learn React',
+            completed : true
         },
         {
             id : 3,
@@ -188,7 +188,7 @@ function Todolist() {
 }
 const today = new Date();
 const fs = document.getElementById('footerSpan');
-fs.innerText = today.getFullYear() + ' All rights reserved';
+fs.innerText = today.getFullYear() + '\n All rights reserved';
 const myTodo = Todolist();
 myTodo.init();
 console.log(myTodo);

@@ -132,6 +132,7 @@ li, .fl, .fr, .cross {
 
 button {
     width: 120px;
+    /* box-shadow: 3px 6px rgba(0, 0, 0, 0.035); */
 }
 /* // DEBUG SESSION */
 li.completed::after, div.fl.completed::after {
